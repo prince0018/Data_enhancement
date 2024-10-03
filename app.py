@@ -16,8 +16,13 @@ if uploaded_file is not None:
     st.write("Here is the content of your dataset:")
     st.dataframe(data)  # Display the dataframe in an interactive table
     
-    # Create sliders for each column
-    st.write("Rate the importance of each column (1 to 5):")
+    # Create sliders for each attribute of each column
+    st.write("Rate the attributes of each column (1 to 5):")
+    attributes = ["Completeness", "Duplication", "Consistency", "Outliers"]
+    
     for column in data.columns:
-        slider_value = st.slider(column, 1, 5, 3)  # Default value is 3
-        st.write(f"Importance rating for '{column}': {slider_value}")
+        st.write(f"**Column: {column}**")
+        for attribute in attributes:
+            slider_value = st.slider(f"{attribute} for {column}", 1, 5, 3)  # Default value is 3
+            st.write(f"{attribute} rating for '{column}': {slider_value}")
+        st.write("---")
